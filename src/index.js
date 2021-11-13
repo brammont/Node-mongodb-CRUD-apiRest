@@ -2,12 +2,23 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const app = express()
-const port = 3000
+const port = 4000
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+//configuracion
+app.use(bodyParser.urlencoded({
+    extended:false
+}));
+app.use(bodyParser.json())
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+//middlewares
+mongoose.connect(
+    "mongodb://localhost/usuarios",
+    { useNewUrlParser : true },
+    (err,res)=>{
+        err && console.log("error conectando a la db");
+        app.listen(port, () => {
+            console.log(`Example app listening at http://localhost:${port}`)
+        })
+    }    
+)
+

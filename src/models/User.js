@@ -5,4 +5,5 @@ const UserShema = new Shema({
     name:{type : String},
     username:{type:String},
     password:{type:String}
-})
+});
+module.exports = User = mongoose.model('User',UserShema);
